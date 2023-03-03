@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>About Page</h2>
+
+
+<h2>{{ page_title }}</h2>
 <p>
     The formation of the group grew out of a meeting Gandalf had with Thorin in Bree which kindled Thorin's interest in
     recapturing his long lost family inheritance. (Thorin's grandfather had been the King under the Mountain when Smaug
@@ -11,39 +13,41 @@
     business, welcomed a fourteenth to fill into their party.
 </p>
 
-<div class="row featurette">
-    <div class="col-md-7">
-        <h3>Thorin Oakenshield</h3>
-        <p>
-            Thorin II was born in TA 2746 to Dwarf prince Thráin II in the city of the Lonely Mountain. Early in his
-            youth, he and the other Dwarves of the Lonely Mountain were forced to flee by the dragon Smaug in TA 2770.
-            While in exile, he quickly grew to become a capable warrior. This was demonstrated when he participated in
-            the Battle of Azanulbizar in TA 2799. He fought with one of the Dwarven armies beneath the East-gate of
-            Moria. At some point in the fighting, his shield broke, and using an oaken tree branch found on the ground
-            as a shield, he gained the epithet "Oakenshield," which would remain with him even in death.[2]
+{% for member in company %}
 
-            Thorin became King-in-Exile of Durin's Folk in TA 2850 after his father went missing, and died in the
-            dungeons of Dol Guldur.
+
+<div class="row featurette">
+
+    {% if loop.index % 2 != 0 %}
+    <div class="col-md-7">
+        <h3>{{loop.index}} {{member.name}}</h3>
+        <p>
+            {{ member.description }}
         </p>
     </div>
     <div class="col-md-5">
-        <img src="https://static.wikia.nocookie.net/lotr/images/f/fb/BzroIDYCYAMICdB.jpg" alt="Picture of Thorin">
+        <img src="{{member.image_source}}" alt="Picture of Thorin" class="featurette-image image-responsive">
     </div>
-</div>
+    {% else %}
 
-
-<div class="row featurette">
     <div class="col-md-5">
-        <img src="https://static.wikia.nocookie.net/lotr/images/b/b4/The-Hobbit-Fili-and-Kili.jpg" alt="duo">
+        <img src="{{member.image_source}}" alt="Picture of Thorin" class="featurette-image image-responsive">
     </div>
     <div class="col-md-7">
-        <h3>Fili and Kili</h3>
-        <p>Fíli and Kíli were nephews of Thorin, who was the elder brother of their mother, Dís. They were also nephews
-            of Frerin, grandsons of Thráin II, and great-grandsons of Thrór. Fíli's most distinguishing feature was his
-            long nose, the longest of any of the Dwarves in Thorin's company.[2]
+        <h3>{{loop.index}} {{member.name}}</h3>
+        <p>
+            {{ member.description }}
+        </p>
+    </div>
 
-            As the youngest Dwarves, Fíli and Kíli had the sharpest eyes, and were often sent scouting or searching. It
-            was they that found the Front Porch while in the Misty Mountains.[3]</p>
-        </div>
+    {% endif %}
 </div>
+{% if loop.index != loop.length %}
+<hr class="featurette-divider">
+
+{% endif %}
+
+{% endfor %}
+
+
 {% endblock %}
